@@ -5,6 +5,16 @@ const exjwt = require("express-jwt");
 const parseBearerToken = require("parse-bearer-token");
 const uuid = require("uuid/v4");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const User = require("../models/User.js");
+
+mongoose.connect(
+  "mongodb://Fedorovskyi:ZXCvbnmzxc123@ds153763.mlab.com:53763/mongo-jwt",
+  { useNewUrlParser: true },
+  err => {
+    console.log(err || `Connected to MongoDB.`);
+  }
+);
 
 const SECRET_KEY = "SECRET_KEY";
 
@@ -64,6 +74,29 @@ app.post("/login", (req, res) => {
  */
 app.get("/", (req, res) => {
   res.send("Public Route");
+});
+
+/**
+ * CREATE USER
+ */
+app.post("/register", (req, res) => {
+  const user = new User({
+    name: req.body.name,
+    password: req.body.password
+  });
+  const token = jwt.sign(
+    {
+      id: user._id,
+      name: user.name
+    },
+    SECRET_KEY
+  );
+  user.save().then(user =>
+    res.status(200).json({
+      message: "User created",
+      token: token
+    })
+  );
 });
 
 /**
