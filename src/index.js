@@ -6,7 +6,7 @@ const parseBearerToken = require("parse-bearer-token");
 const uuid = require("uuid/v4");
 const cors = require("cors");
 
-const SECRET_KEY = "my secret key string";
+const SECRET_KEY = "SECRET_KEY";
 
 // Instantiating the express app
 const app = express();
