@@ -86,7 +86,7 @@ app.post("/register", (req, res) => {
   });
   const token = jwt.sign(
     {
-      id: user._id,
+      _id: user._id,
       name: user.name
     },
     SECRET_KEY
@@ -94,6 +94,7 @@ app.post("/register", (req, res) => {
   user.save().then(user =>
     res.status(200).json({
       message: "User created",
+      user: user,
       token: token
     })
   );
