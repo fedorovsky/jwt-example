@@ -4,7 +4,7 @@
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ username: "username-1", password: "password-1" })
+    body: JSON.stringify({ name: "name-1", password: "password-1" })
   });
   const content = rawResponse.json();
 
