@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 function signToken(user) {
   const userData = user.toObject();
@@ -8,5 +8,5 @@ function signToken(user) {
 }
 
 module.exports = {
-  signToken
+  signToken,
 };

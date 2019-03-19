@@ -1,5 +1,5 @@
-const User = require("../models/User.js");
-const signToken = require("../utils.js").signToken;
+const User = require('../models/User.js');
+const signToken = require('../utils.js').signToken;
 
 module.exports = {
   /**
@@ -10,20 +10,20 @@ module.exports = {
       .then(user => {
         if (user.validPassword(req.body.password)) {
           res.status(200).json({
-            message: "Authentication Success",
-            token: signToken(user)
+            message: 'Authentication Success',
+            token: signToken(user),
           });
         } else {
           res.status(401).json({
-            message: "Password Error",
-            token: null
+            message: 'Password Error',
+            token: null,
           });
         }
       })
       .catch(err => {
         res.status(401).json({
-          message: "Authentication Error",
-          token: null
+          message: 'Authentication Error',
+          token: null,
         });
       });
   },
@@ -33,23 +33,23 @@ module.exports = {
   register: (req, res) => {
     const user = new User({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     });
     user
       .save()
       .then(user =>
         res.status(200).json({
-          message: "User created",
+          message: 'User created',
           user: user,
-          token: signToken(user)
+          token: signToken(user),
         })
       )
       .catch(err => {
         res.status(500).json({
-          message: "Error User created",
+          message: 'Error User created',
           error: err,
-          token: null
+          token: null,
         });
       });
-  }
+  },
 };
