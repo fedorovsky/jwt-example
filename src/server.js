@@ -10,6 +10,7 @@ const dotenv = require('dotenv').load();
 const User = require('./models/User.js');
 const signToken = require('./utils.js').signToken;
 const usersCtrl = require('./controllers/users.js');
+const routes = require('./routes');
 
 mongoose.set('useCreateIndex', true);
 mongoose
@@ -50,6 +51,8 @@ app.get('/private', jwtMiddleware, (req, res) => {
     user: user,
   });
 });
+
+app.use('/api', routes);
 
 /**
  * PUBLIC ROUTE
