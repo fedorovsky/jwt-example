@@ -4,10 +4,12 @@ const router = express.Router();
 
 const users = [
     {
+        id: 1,
         firstName: 'User',
         lastname: 'One',
     },
     {
+        id: 2,
         firstName: 'User',
         lastname: 'Two',
     }
