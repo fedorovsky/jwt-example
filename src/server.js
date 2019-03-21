@@ -52,7 +52,7 @@ app.get('/private', jwtMiddleware, (req, res) => {
   });
 });
 
-app.use('/api', routes);
+app.use('/api', jwtMiddleware, routes);
 
 /**
  * PUBLIC ROUTE
