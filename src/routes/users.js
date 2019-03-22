@@ -6,12 +6,12 @@ const users = [
     {
         id: 1,
         firstName: 'User',
-        lastname: 'One',
+        lastName: 'One',
     },
     {
         id: 2,
         firstName: 'User',
-        lastname: 'Two',
+        lastName: 'Two',
     }
 ]
 
