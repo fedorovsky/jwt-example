@@ -9,8 +9,8 @@ const logger = require('morgan');
 const dotenv = require('dotenv').load();
 const User = require('./models/User.js');
 const signToken = require('./utils.js').signToken;
-const usersCtrl = require('./controllers/users.js');
-const routes = require('./routes');
+const authRouter = require('./routes/auth');
+const apiRouter = require('./routes/api');
 
 mongoose.set('useCreateIndex', true);
 mongoose
@@ -35,12 +35,6 @@ const jwtMiddleware = exjwt({
 });
 
 /**
- * USER ROUTES
- */
-app.post('/login', usersCtrl.login);
-app.post('/register', usersCtrl.register);
-
-/**
  * PRIVATE ROUTE
  */
 app.get('/private', jwtMiddleware, (req, res) => {
@@ -52,14 +46,8 @@ app.get('/private', jwtMiddleware, (req, res) => {
   });
 });
 
-app.use('/api', jwtMiddleware, routes);
-
-/**
- * PUBLIC ROUTE
- */
-app.get('/', (req, res) => {
-  res.send('Public Route');
-});
+app.use('/auth', authRouter);
+app.use('/api', jwtMiddleware, apiRouter);
 
 /**
  * ERROR HANDLER
